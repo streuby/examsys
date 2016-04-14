@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 Flasky
 ======
 
@@ -9,4 +8,3 @@ The commits and tags in this repository were carefully created to match the sequ
 =======
 # examsys
 a exam system base on flask
->>>>>>> d9fa94e9e90f1840d47c1f2f5cf827cd3062e9cb
