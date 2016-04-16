@@ -1,6 +1,10 @@
 
 *~
 *.mp4
+*.sqlite
+
+migrations/
+venv/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
