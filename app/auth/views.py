@@ -3,7 +3,7 @@ from flask import render_template, flash, redirect, url_for, request
 from flask.ext.login import login_user, logout_user, login_required
 from . import auth
 from ..models import User 
-from .forms import LoginForm 
+from .forms import LoginForm, ChangePasswordForm
 
 
 @auth.route('/login', methods=['GET', 'POST'])
@@ -27,3 +27,12 @@ def logout():
 	logout_user()
 	flash(u'你已经退出系统。')
 	return redirect(url_for('main.index'))
+
+
+@auth.route('/change-password', methods=['GET', 'POST'])
+@login_required
+def change_password():
+	form = ChangePasswordForm()
+
+
+	return render_template('auth/change_password.html', form=form)
