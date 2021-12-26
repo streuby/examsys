@@ -14,7 +14,7 @@ class Config:
     # FLASKY_MAIL_SUBJECT_PREFIX = '[Flasky]'
    	#FLASKY_MAIL_SENDER = 'Flasky Admin <flasky@example.com>'
 	EXAM_ADMIN = os.environ.get('EXAM_ADMIN')
-	EXAM_TITLE = os.environ.get('EXAM_TITLE') or u'会考理论题库' 
+	EXAM_TITLE = os.environ.get('EXAM_TITLE') or u'Exam system' 
 	
 	@staticmethod
 	def init_app(app):
@@ -25,6 +25,7 @@ class DevelopmentConfig(Config):
     DEBUG = True
     SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URL') or \
         'sqlite:///' + os.path.join(basedir, 'data-dev.sqlite')
+    SQLALCHEMY_TRACK_MODIFICATIONS = True
 
 
 class TestingConfig(Config):

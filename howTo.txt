@@ -1,0 +1,17 @@
+python -m venv C:\Users\streu\OneDrive\Documents\ExamPortal\examsys\env
+./Activate
+pip install flask
+Set Scripts Execution Policy on Windows from Powershell as an Administrator: Set-ExecutionPolicy RemoteSigned -Scope LocalMachine
+pip freeze > requirements.txt
+how to install dot env: pip install python-dotenv
+how to run flask: flask run
+git config --global user.email "you@example.com"
+git config --global user.name "Your Name"
+How deativate Virtua Envioronment:
+    run: deactivate
+How dependencies from requirements.txt file:
+    run: pip install -r requirements.txt
+How to migrate database changes
+    run: flask db migrate -m "Message here...."
+
+

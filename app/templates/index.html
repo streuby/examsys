@@ -1,15 +1,15 @@
 {% extends "base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
 
-{% block title %}会考理论题库{% endblock %}
+{% block title %}Exam system-Home{% endblock %}
 
 {% block page_content %}
 <div class="page-header">
-	<h1>{% if current_user.is_authenticated %}{{ current_user.username }}{% else %}访客{% endif %} 您好！</h1>
+	<h1>{% if current_user.is_authenticated %} Hi! {{ current_user.username }}{% else %}Hi Guest{% endif %}</h1>
 	{% if not known %}
-	欢迎访问！
+	Welcome!
 	{% else %}
-	欢迎回来！
+	Welcom to exam system！
 	{% endif %}
 </div>
 {{ wtf.quick_form(form) }}

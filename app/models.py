@@ -1,6 +1,6 @@
 from werkzeug.security import generate_password_hash
 from werkzeug.security import check_password_hash
-from flask.ext.login import UserMixin
+from flask_login import UserMixin
 from . import db
 from . import login_manager
 
@@ -18,6 +18,10 @@ class User(UserMixin, db.Model):
 	__tablename__ = 'users'
 	id = db.Column(db.Integer, primary_key=True)
 	username = db.Column(db.String(64), unique=True, index=True)
+	firstname = db.Column(db.String(64), nullable=False)
+	middlename = db.Column(db.String(64), nullable=True)
+	lastname = db.Column(db.String(64), nullable=True)
+	email = db.Column(db.String(64), unique=True, index=True)
 	password_hash = db.Column(db.String(128))
 	#role_id = db.
 

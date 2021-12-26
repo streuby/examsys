@@ -12,7 +12,7 @@ def index():
 	if form.validate_on_submit():
 		old_name = session.get('name')
 		if old_name is not None and old_name != form.name.data:
-			flash(u'看来你修改了名字！')
+			flash(u'Looks like you changed your name!')
 			session['known'] = False
 		
 		session['known'] = True 

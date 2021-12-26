@@ -1,8 +1,8 @@
 #coding=utf-8
-from flask.ext.wtf import Form
+from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
-from wtforms.validators import Required
+from wtforms.validators import DataRequired
 
-class NameForm(Form):
-    name = StringField(u'请输入你的名字：', validators=[Required()])
-    submit = SubmitField(u'提交')
+class NameForm(FlaskForm):
+    name = StringField(u'Please enter your name：', validators=[DataRequired()])
+    submit = SubmitField(u'Submit')

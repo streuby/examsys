@@ -1,20 +1,31 @@
 #coding=utf-8
-from flask.ext.wtf import Form
+from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
-from wtforms.validators import Required, EqualTo
+from wtforms.validators import DataRequired, EqualTo, Email
 
 
-class LoginForm(Form):
-	username = StringField(u'用户名', validators=[Required()])
-	password = PasswordField(u'密码', validators=[Required()])
-	remember_me = BooleanField(u'记住我')
-	submit = SubmitField(u'登录')
+class LoginForm(FlaskForm):
+	username = StringField(u'Username', validators=[DataRequired()])
+	password = PasswordField(u'Password', validators=[DataRequired()])
+	remember_me = BooleanField(u'Remeber me')
+	submit = SubmitField(u'Submit')
+ 
+class RegisterForm(FlaskForm):
+	username = StringField(u'Username', validators=[DataRequired()])
+	firstname = StringField(u'Firstname', validators=[DataRequired()])
+	middlename = StringField(u'Middlename')
+	lastname = StringField(u'Surname', validators=[DataRequired()])
+	email = StringField('Email', validators=[DataRequired(), Email()])
+	password = PasswordField(u'Create Password', validators=[
+		DataRequired(), EqualTo('password2', message=u'Password must be the same')])
+	password2 = PasswordField(u'Repeat Password', validators=[DataRequired()])
+	submit = SubmitField(u'Register')
 
 
-class ChangePasswordForm(Form):
-	old_password = PasswordField(u'原始密码', validators=[Required()])
-	password = PasswordField(u'新密码', validators=[
-		Required(), EqualTo('password2', message=u'两次输入的密码必须一致')])
-	password2 = PasswordField(u'请确认密码', validators=[Required()])
-	submit = SubmitField(u'修改密码')
+class ChangePasswordForm(FlaskForm):
+	old_password = PasswordField(u'Old password', validators=[DataRequired()])
+	password = PasswordField(u'New Password', validators=[
+		DataRequired(), EqualTo('password2', message=u'Password must be the same')])
+	password2 = PasswordField(u'Repeat New Password', validators=[DataRequired()])
+	submit = SubmitField(u'Submit')
 
