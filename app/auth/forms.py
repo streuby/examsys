@@ -8,7 +8,8 @@ class LoginForm(FlaskForm):
 	username = StringField(u'Username', validators=[DataRequired()])
 	password = PasswordField(u'Password', validators=[DataRequired()])
 	remember_me = BooleanField(u'Remeber me')
-	submit = SubmitField(u'Submit')
+	submit = SubmitField('Login', render_kw={"class":"btn btn-primary btn-sm submit", 
+                                        "type":"submit", "data-required":"login-required"})
  
 class RegisterForm(FlaskForm):
 	username = StringField(u'Username', validators=[DataRequired()])
@@ -19,7 +20,8 @@ class RegisterForm(FlaskForm):
 	password = PasswordField(u'Create Password', validators=[
 		DataRequired(), EqualTo('password2', message=u'Password must be the same')])
 	password2 = PasswordField(u'Repeat Password', validators=[DataRequired()])
-	submit = SubmitField(u'Register')
+	submit = SubmitField('Register', render_kw={"class":"btn btn-primary btn-sm submit", 
+                                        "type":"submit", "data-required":"login-required"})
 
 
 class ChangePasswordForm(FlaskForm):
