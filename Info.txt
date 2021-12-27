@@ -51,3 +51,11 @@ ALTER USER  'root'@'localhost' IDENTIFIED BY 'the-new-password';
 
 /var/log/daemon.log
 /var/log/nginx/error.log
+
+sudo nano /var/log/daemon.log
+
+sudo nano /var/log/nginx/error.log
+
+-----restart gunicorn service-----
+
+sudo systemctl restart examsys.service
