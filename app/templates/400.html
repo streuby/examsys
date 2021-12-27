@@ -4,8 +4,9 @@
 
 {% block page_content %}
 <div class="page-header">
-	<h1>{{ ('Not Found') }}</h1>
-    <h4>{{ error }}</h4>
-    <p><a href="{{ url_for('main.index') }}">{{ ('Back') }}</a></p>
+	<h1>{{ error.error }}</h1>
+    <h4>{{ error.message }}</h4>
+    {% if error.link %}
+    <p><a href="{{ url_for('crud.pricing') }}">{{ error.link }}</a></p>
 </div>
 {% endblock %}

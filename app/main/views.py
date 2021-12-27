@@ -1,6 +1,7 @@
 #coding=utf-8
 from datetime import datetime
-from flask import render_template, session, redirect, url_for, flash, current_app
+from flask import render_template, session, redirect, url_for, flash, current_app, abort
+from werkzeug.exceptions import InternalServerError
 from . import main
 from .. import db
 from .forms import NameForm 
@@ -14,10 +15,10 @@ def index():
 	if form.validate_on_submit():
 		old_name = session.get('name')
 		if old_name is not None and old_name != form.name.data:
-			flash(u'Looks like you changed your name!')
-			session['known'] = False
-		
-		session['known'] = True 
+      		
+			session['known'] = True 
+			
+   
 		session['name'] = form.name.data
 		return redirect(url_for('.index'))
 

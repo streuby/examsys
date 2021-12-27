@@ -33,6 +33,16 @@ def create_app(config_name):
     from .auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint, url_prefix='/auth')
     
+    from app.errors import errors
+    app.register_blueprint(errors)
+    
+    # @app.errorhandler(500)
+    # def server_error(e):
+    #     return """
+    #     An internal error occurred: <pre>{}</pre>
+    #     See logs for full stacktrace.
+    #     """.format(e), 500
+    
     # if config_name == 'production':
     #     gunicorn_error_logger = logging.getLogger('gunicorn.error')
     #     app.logger.handlers.extend(gunicorn_error_logger.handlers)
