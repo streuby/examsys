@@ -13,7 +13,7 @@ def login():
 	form = LoginForm()
 	try:	
 		
-		if form.validate_on_submit():
+		#if form.validate_on_submit():
 			#abort(500)
 			# user = User.query.filter_by(username=form.username.data).first()
 
