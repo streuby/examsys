@@ -3,9 +3,9 @@ from flask import render_template, flash, redirect, url_for, request, abort
 from flask_login import login_user, logout_user, login_required
 
 from app.errors.handlers import InvalidUsage
-from app.auth import auth
-from app.models import User, db
-from forms import LoginForm, ChangePasswordForm, RegisterForm
+from . import auth
+from ..models import User, db
+from .forms import LoginForm, ChangePasswordForm, RegisterForm
 
 
 @auth.route('/login', methods=['GET', 'POST'])
