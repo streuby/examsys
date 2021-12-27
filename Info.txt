@@ -1,0 +1,43 @@
+gunicorn -b 0.0.0.0:8080 manage:app
+
+sudo nano /etc/systemd/system/examsys.service
+
+sudo systemctl daemon-reload
+sudo systemctl start examsys.service
+sudo systemctl enable examsys.service
+
+curl localhost:8080
+
+sudo apt-get install nginx
+sudo systemctl enable nginx
+
+sudo nano /etc/nginx/sites-available/default
+
+sudo systemctl restart nginx
+
+
+INSTALL MySQL database----ubuntu instance:
+
+sudo apt update
+sudo apt install mysql-server
+
+-----MySql server should run authomatically-----
+
+Check status with:
+
+sudo systemctl status mysql
+
+-----Login as root----------
+
+sudo mysql
+
+----set Password for root with a strong password-----
+
+mysql> ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'your_password_here';
+mysql> FLUSH PRIVILEGES;
+
+------Now, let’s exit and log in with the root credentials.-------
+
+exit
+
+sudo mysql -u root -p
