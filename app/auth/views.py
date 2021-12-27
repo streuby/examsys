@@ -1,5 +1,5 @@
 #coding=utf-8
-from flask import render_template, flash, redirect, url_for, request
+from flask import render_template, flash, redirect, url_for, request, abort
 from flask_login import login_user, logout_user, login_required
 
 from app.errors.handlers import InvalidUsage
@@ -14,6 +14,7 @@ def login():
 	try:	
 		
 		if form.validate_on_submit():
+			abort(500)
 			user = User.query.filter_by(username=form.username.data).first()
 
 			if user is not None and user.verify_password(form.password.data):
