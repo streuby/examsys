@@ -41,3 +41,13 @@ mysql> FLUSH PRIVILEGES;
 exit
 
 sudo mysql -u root -p
+
+----to change root password----
+
+ALTER USER  'root'@'localhost' IDENTIFIED BY 'the-new-password';
+
+
+----ubunto error log location-----
+
+/var/log/daemon.log
+/var/log/nginx/error.log

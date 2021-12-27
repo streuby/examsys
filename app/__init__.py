@@ -33,10 +33,15 @@ def create_app(config_name):
     from .auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint, url_prefix='/auth')
     
-    if config_name == 'production':
-        gunicorn_error_logger = logging.getLogger('gunicorn.error')
-        app.logger.handlers.extend(gunicorn_error_logger.handlers)
-        app.logger.setLevel(logging.DEBUG)
-        app.logger.debug('this will show in the log')
+    # if config_name == 'production':
+    #     gunicorn_error_logger = logging.getLogger('gunicorn.error')
+    #     app.logger.handlers.extend(gunicorn_error_logger.handlers)
+    #     app.logger.setLevel(logging.DEBUG)
+    #     app.logger.debug('this will show in the log')
+    
+    if __name__ != '__main__':
+        gunicorn_logger = logging.getLogger('gunicorn.error')
+        app.logger.handlers = gunicorn_logger.handlers
+        app.logger.setLevel(gunicorn_logger.level)
 
     return app
