@@ -2,9 +2,9 @@
 from datetime import datetime
 from flask import render_template, session, redirect, url_for, flash, current_app, abort
 from werkzeug.exceptions import InternalServerError
-from . import main
-from .. import db
-from .forms import NameForm 
+from app.main import main
+from app.models import db
+from forms import NameForm 
 
 app = current_app
 
