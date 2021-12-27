@@ -4,7 +4,7 @@ from flask_login import login_user, logout_user, login_required
 
 from app.errors.handlers import InvalidUsage
 from . import auth
-from ..models import User, db
+from app.models import User, db
 from .forms import LoginForm, ChangePasswordForm, RegisterForm
 
 
@@ -14,7 +14,7 @@ def login():
 	try:	
 		
 		if form.validate_on_submit():
-			#user = User.query.filter_by(username=form.username.data).first()
+			user = User.query.filter_by(username=form.username.data).first()
 
 			# if user is not None and user.verify_password(form.password.data):
 			# 	login_user(user, form.remember_me.data)
