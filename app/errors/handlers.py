@@ -1,4 +1,4 @@
-from flask import render_template, request
+from flask import render_template, request, jsonify
 from app import db
 from app.errors import errors
 from app.api.errors import error_response as api_error_response
@@ -26,7 +26,6 @@ def internal_error(error):
             ignore_system_exceptions=False)
     _error = str(error) + str(track.log())
     return render_template('500.html', error=_error ), 500
-
 class InvalidUsage(Exception):
     status_code = 400
 
@@ -45,3 +44,10 @@ class InvalidUsage(Exception):
         rv['error'] = self.error
         rv['link'] = self.link
         return rv
+
+@errors.app_errorhandler(InvalidUsage)
+def handle_invalid_usage(error):
+    response = jsonify(error.to_dict())
+    response.status_code = error.status_code
+    #print(str(error.to_dict()))
+    return render_template('errors/400.html', error=error.to_dict()), response.status_code
