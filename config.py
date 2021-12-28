@@ -1,9 +1,17 @@
 #coding=utf-8
 import os
+from os.path import join, dirname
 from pathlib import Path
+from dotenv import load_dotenv
+
+
 home = str(Path.home())
 basedir = os.path.abspath(os.path.dirname(__file__))
 _basedir = str(basedir)
+
+dotenv_path = join(dirname(__file__), '.env')
+load_dotenv(dotenv_path)
+
 
 
 class Config:
@@ -38,16 +46,14 @@ class TestingConfig(Config):
 
 
 class ProductionConfig(Config):
-    # SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
-    #     'sqlite:///' + os.path.join(basedir, 'data.sqlite')
+    SQLALCHEMY_DATABASE_URI = os.environ.get('SQLALCHEMY_DATABASE_URI') or \
+         'sqlite:///' + os.path.join(basedir, 'data.sqlite')
     PROPAGATE_EXCEPTIONS = True
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    # SECRET_KEY = os.environ.get("SECRET_KEY")
-    FLASK_CONFIG='development'
-    FLASK_APP= 'manage.py'
-    DATABASE_URL='mysql+pymysql://root:PUBLICman09@localhost/examsys_db'
-    SQLALCHEMY_DATABASE_URI='mysql+pymysql://root:PUBLICman09@localhost/examsys_db'
-    SECRET_KEY='p9Bv3Eid9$i01'
+    SECRET_KEY = os.environ.get("SECRET_KEY")
+    FLASK_CONFIG=os.environ.get('FLASK_CONFIG')
+    FLASK_APP= os.environ.get('FLASK_APP')
+    DATABASE_URL=os.environ.get('DATABASE_URL')
 
 
 config = {
