@@ -7,7 +7,7 @@ from flask_login import LoginManager
 import logging
 from logging.handlers import SMTPHandler, RotatingFileHandler
 
-from config import config
+from config import config, _basedir, home
 
 bootstrap = Bootstrap()
 moment = Moment()
@@ -57,7 +57,16 @@ def create_app(config_name):
     #     app.logger.setLevel(gunicorn_logger.level)
     
     # Configure customer logger
+    log_path = r""
     if config_name == 'production':
+        log_path = r'/home/ubuntu/examsys/logs/'
+        if not os.path.exists(log_path):
+            os.mkdir(log_path)
+    if config_name == 'development' or config_name == 'default':
+        log_path = r'{}{}'.format(_basedir, '\logs\/')
+        if not os.path.exists(log_path):
+            os.makedirs(log_path)
+    
         # if app.config['MAIL_SERVER']:
         #     auth = None
         #     if app.config['MAIL_USERNAME'] or app.config['MAIL_PASSWORD']:
@@ -74,10 +83,10 @@ def create_app(config_name):
         #     mail_handler.setLevel(logging.ERROR)
         #     app.logger.addHandler(mail_handler)
 
-        if not os.path.exists('/home/ubuntu/examsys/logs'):
-            os.mkdir('/home/ubuntu/examsys/logs')
-        file_handler = RotatingFileHandler('/home/ubuntu/examsys/logs/examsys.log',
-                                           maxBytes=10240, backupCount=10)
+    if log_path != r"":
+        #with open(log_path + 'examsys.log', 'w', encoding='utf-8') as f:   
+        file_handler = RotatingFileHandler(log_path+'examsys.log',
+                                            maxBytes=10240, backupCount=10)
         file_handler.setFormatter(logging.Formatter(
             '%(asctime)s %(levelname)s: %(message)s '
             '[in %(pathname)s:%(lineno)d]'))

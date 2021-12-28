@@ -1,6 +1,9 @@
 #coding=utf-8
 import os
+from pathlib import Path
+home = str(Path.home())
 basedir = os.path.abspath(os.path.dirname(__file__))
+_basedir = str(basedir)
 
 
 class Config:

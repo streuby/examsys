@@ -1,8 +1,10 @@
-from flask import render_template, request, jsonify
+from flask import render_template, request, jsonify, current_app
 from app import db
 from app.errors import errors
 from app.api.errors import error_response as api_error_response
 from  werkzeug.debug import get_current_traceback
+
+app = current_app
 
 
 def wants_json_response():
@@ -14,6 +16,10 @@ def wants_json_response():
 def not_found_error(error):
     if wants_json_response():
         return api_error_response(404)
+    track= get_current_traceback(skip=1, show_hidden_frames=True,
+            ignore_system_exceptions=False)
+    _error = str(error) + str(track.log())
+    app.logger.error('An Error occured : ' + _error)
     return render_template('404.html', error=error), 404
 
 
@@ -25,7 +31,8 @@ def internal_error(error):
     track= get_current_traceback(skip=1, show_hidden_frames=True,
             ignore_system_exceptions=False)
     _error = str(error) + str(track.log())
-    return render_template('500.html', error=_error ), 500
+    app.logger.error('An Error occured : ' + _error)
+    return render_template('500.html', error=error ), 500
 class InvalidUsage(Exception):
     status_code = 400
 
@@ -49,5 +56,9 @@ class InvalidUsage(Exception):
 def handle_invalid_usage(error):
     response = jsonify(error.to_dict())
     response.status_code = error.status_code
+    track= get_current_traceback(skip=1, show_hidden_frames=True,
+            ignore_system_exceptions=False)
+    _error = str(error) + str(track.log())
+    app.logger.error('An Error occured : ' + _error)
     #print(str(error.to_dict()))
     return render_template('errors/400.html', error=error.to_dict()), response.status_code

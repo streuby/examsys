@@ -17,17 +17,17 @@ def index():
 		if old_name is not None and old_name != form.name.data:
       		
 			session['known'] = True 
-			abort(500)
+			abort(404)
 
    
 		session['name'] = form.name.data
-		return redirect(url_for('.index'))
+	# 	return redirect(url_for('.index'))
 
-	app.logger.debug('this is a DEBUG message')
-	app.logger.info('this is a INFO message')
-	app.logger.warning('this is a WARNING message')
-	app.logger.error('this is a ERROR message')
-	app.logger.critical('this is a CRITICAL message')
+	# app.logger.debug('this is a DEBUG message')
+	# app.logger.info('this is a INFO message')
+	# app.logger.warning('this is a WARNING message')
+	# app.logger.error('this is a ERROR message')
+	# app.logger.critical('this is a CRITICAL message')
 
 	return render_template('index.html', 
 					form=form, 
