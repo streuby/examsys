@@ -33,6 +33,7 @@ def register():
 		user = User(email=form.email.data,
 			username=form.username.data,
 			firstname=form.firstname.data,
+			middlename=form.middlename.data,
 			lastname=form.lastname.data,
 			password=form.password.data) or None
 
