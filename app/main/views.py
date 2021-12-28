@@ -17,7 +17,7 @@ def index():
 		if old_name is not None and old_name != form.name.data:
       		
 			session['known'] = True 
-			abort(404)
+			abort(500)
 
    
 		session['name'] = form.name.data
