@@ -57,7 +57,7 @@ def create_app(config_name):
     #     app.logger.setLevel(gunicorn_logger.level)
     
     # Configure customer logger
-    if not app.debug and not app.testing:
+    if config_name == 'production':
         # if app.config['MAIL_SERVER']:
         #     auth = None
         #     if app.config['MAIL_USERNAME'] or app.config['MAIL_PASSWORD']:
