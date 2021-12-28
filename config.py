@@ -38,11 +38,16 @@ class TestingConfig(Config):
 
 
 class ProductionConfig(Config):
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
-        'sqlite:///' + os.path.join(basedir, 'data.sqlite')
+    # SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
+    #     'sqlite:///' + os.path.join(basedir, 'data.sqlite')
     PROPAGATE_EXCEPTIONS = True
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    SECRET_KEY = os.environ.get("SECRET_KEY")
+    # SECRET_KEY = os.environ.get("SECRET_KEY")
+    FLASK_CONFIG='development'
+    FLASK_APP= 'manage.py'
+    DATABASE_URL='mysql+pymysql://root:PUBLICman09@localhost/examsys_db'
+    SQLALCHEMY_DATABASE_URI='mysql+pymysql://root:PUBLICman09@localhost/examsys_db'
+    SECRET_KEY='p9Bv3Eid9$i01'
 
 
 config = {
