@@ -14,7 +14,7 @@ def login():
 	try:	
 		
 		if form.validate_on_submit():
-			user = User.query.filter_by(username=form.username.data).first()
+			user = User.query.filter_by(username=form.username.data).first() or None
 
 			# if user is not None and user.verify_password(form.password.data):
 			# 	login_user(user, form.remember_me.data)
@@ -34,14 +34,15 @@ def register():
 			username=form.username.data,
 			firstname=form.firstname.data,
 			lastname=form.lastname.data,
-			password=form.password.data)
+			password=form.password.data) or None
 
         # add employee to the database
-		db.session.add(user)
-		db.session.commit()
-		login_user(user)
-		flash(u'You have successfully registered! You may now login.')
-		return redirect(request.args.get('next') or url_for('main.index', known=True))
+		if user is not None:
+			db.session.add(user)
+			db.session.commit()
+			login_user(user)
+			flash(u'You have successfully registered! You may now login.')
+			return redirect(request.args.get('next') or url_for('main.index', known=True))
 	return render_template('auth/register.html', form=form)
 
 
